@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
+import axios from 'axios';
 
 function App() {
 
@@ -12,10 +13,23 @@ function App() {
     if(Object.keys(busquedaLetram).length === 0) return;
 
     //si no esta vacio se ejecuta
-    console.log('no se ejecuta');
-    
-  },[busquedaLetram]);
+    const consultarApiLetra = async () => {
 
+      const { artista, cancion } = busquedaLetram;
+
+      const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
+
+      const resultado = await axios(url); 
+
+      console.log(resultado.data.lyrics);
+      
+
+    }
+
+    consultarApiLetra();
+
+  },[busquedaLetram]);
+  
   return (  
     <Fragment>
       <Formulario setBusquedaLetra={setBusquedaLetra}/>
