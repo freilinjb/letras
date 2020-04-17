@@ -7,11 +7,28 @@ const Formulario = () => {
         cancion: ''
     });
 
+    const [error, setError] = useState(false)
+
     const actualizarState = e =>{
         setBusqueda({
             ...busqueda,
             [e.target.name] : e.target.value
         });
+    }
+
+    const buscarInformacion = e => {
+        e.preventDefault();
+
+
+        if(artista.trim() === '' || cancion.trim() === ''){
+            setError(true);
+            return;
+        }
+        //Tobo bajo control, pasa al componente principal
+        setError(false);
+
+
+
     }
 
     const { artista, cancion } = busqueda;
@@ -20,7 +37,7 @@ const Formulario = () => {
         <div className="bg-info"> 
             <div className="container">
                 <div className="row">
-                    <form className="col text-white bg-transparent mb-5 pt-5 pb-2">
+                    <form className="col text-white bg-transparent mb-5 pt-5 pb-2" onSubmit={buscarInformacion}>
                         <fieldset>
                             <legend className="text-center">Buscador de Letras de Canciones</legend>
                         </fieldset>
