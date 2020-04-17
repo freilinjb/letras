@@ -45,10 +45,10 @@ function App() {
 
       <div className="container mt-5">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 col-sm-12">
             <Cancion letra={letra}/>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 col-sm-12">
             <Info info={info}/>
           </div>
         </div>
