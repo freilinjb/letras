@@ -27,9 +27,9 @@ function App() {
         axios(url2)
       ]);
 
-      console.log(letra);
-      console.log(informacion);
-      
+      console.log(letra.data.lyrics);
+      console.log(informacion.data.artists[0]);
+       
       // setLetra(resultado.data.lyrics);
     }
 
