@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
 import Cancion from './components/Cancion';
+import Info  from './components/Info';
 import axios from 'axios';
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   //definir el state
   const [busquedaLetram, setBusquedaLetra] = useState({});
   const [letra, setLetra] = useState('');
-
+  const [info, setInfo] = useState({});
+   
   //cuando cambie la busqueda realiza la consulta
   useEffect(() => {
     //Verifica si el objeto esta bacio 
@@ -27,15 +29,15 @@ function App() {
         axios(url2)
       ]);
 
-      console.log(letra.data.lyrics);
-      console.log(informacion.data.artists[0]);
+      setLetra(letra.data.lyrics);
+      setInfo(informacion.data.artists[0]);
        
       // setLetra(resultado.data.lyrics);
     }
 
     consultarApiLetra();
 
-  },[busquedaLetram]);
+  },[busquedaLetram, info]);
   
   return (  
     <Fragment>
@@ -45,6 +47,9 @@ function App() {
         <div className="row">
           <div className="col-md-6">
             <Cancion letra={letra}/>
+          </div>
+          <div className="col-md-6">
+            <Info info={info}/>
           </div>
         </div>
       </div>
