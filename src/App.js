@@ -19,11 +19,18 @@ function App() {
 
       const { artista, cancion } = busquedaLetram;
 
-      const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
+      const url1 = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
+      const url2 = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
 
-      const resultado = await axios(url); 
+      const [letra, informacion ] = await Promise.all([
+        axios(url1),
+        axios(url2)
+      ]);
 
-      setLetra(resultado.data.lyrics);
+      console.log(letra);
+      console.log(informacion);
+      
+      // setLetra(resultado.data.lyrics);
     }
 
     consultarApiLetra();
