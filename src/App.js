@@ -1,11 +1,13 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
+import Cancion from './components/Cancion';
 import axios from 'axios';
 
 function App() {
 
   //definir el state
   const [busquedaLetram, setBusquedaLetra] = useState({});
+  const [letra, setLetra] = useState('');
 
   //cuando cambie la busqueda realiza la consulta
   useEffect(() => {
@@ -21,9 +23,7 @@ function App() {
 
       const resultado = await axios(url); 
 
-      console.log(resultado.data.lyrics);
-      
-
+      setLetra(resultado.data.lyrics);
     }
 
     consultarApiLetra();
@@ -33,6 +33,14 @@ function App() {
   return (  
     <Fragment>
       <Formulario setBusquedaLetra={setBusquedaLetra}/>
+
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-md-6">
+            <Cancion letra={letra}/>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 }
